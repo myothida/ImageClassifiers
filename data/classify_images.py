@@ -29,6 +29,8 @@ from classifier import classifier
 #       results_dic dictionary that is passed into the function is a mutable 
 #       data type so no return is needed.
 # 
+from classifier import classifier  # Import classifier function from classifier.py
+
 def classify_images(images_dir, results_dic, model):
     """
     Creates classifier labels with classifier function, compares pet labels to 
@@ -37,19 +39,8 @@ def classify_images(images_dir, results_dic, model):
     format the classifier labels so that they will match your pet image labels.
     The format will include putting the classifier labels in all lower case 
     letters and strip the leading and trailing whitespace characters from them.
-    For example, the Classifier function returns = 'Maltese dog, Maltese terrier, Maltese' 
-    so the classifier label = 'maltese dog, maltese terrier, maltese'.
-    Recall that dog names from the classifier function can be a string of dog 
-    names separated by commas when a particular breed of dog has multiple dog 
-    names associated with that breed. For example, you will find pet images of
-    a 'dalmatian'(pet label) and it will match to the classifier label 
-    'dalmatian, coach dog, carriage dog' if the classifier function correctly 
-    classified the pet images of dalmatians.
-     PLEASE NOTE: This function uses the classifier() function defined in 
-     classifier.py within this function. The proper use of this function is
-     in test_classifier.py Please refer to this program prior to using the 
-     classifier() function to classify images within this function 
-     Parameters: 
+    
+    Parameters: 
       images_dir - The (full) path to the folder of images that are to be
                    classified by the classifier function (string)
       results_dic - Results Dictionary with 'key' as image filename and 'value'
@@ -58,11 +49,30 @@ def classify_images(images_dir, results_dic, model):
                 --- where index 1 & index 2 are added by this function ---
                   NEW - index 1 = classifier label (string)
                   NEW - index 2 = 1/0 (int)  where 1 = match between pet image
-                    and classifer labels and 0 = no match between labels
+                    and classifier labels and 0 = no match between labels
       model - Indicates which CNN model architecture will be used by the 
               classifier function to classify the pet images,
-              values must be either: resnet alexnet vgg (string)
+              values must be either: resnet, alexnet, vgg (string)
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    None 
+    
+    # Process all files in the results_dic
+    for key in results_dic:
+       
+        # TODO: 3a. Get the model label from classifier function
+        # Classifier function will return the label based on the image path and model
+        model_label = classifier(images_dir + "/" + key, model)  # Get classifier label
+
+        # TODO: 3b. Process the model_label to convert to lowercase and strip whitespace
+        model_label = model_label.lower().strip()  # Process the classifier label
+
+        # Defines truth as pet image label
+        truth = results_dic[key][0]
+
+        # TODO: 3c. Compare pet label and classifier label, and add match result (1 for match)
+        if truth in model_label:
+            results_dic[key].extend([model_label, 1])  # Add classifier label and match (1)
+        else:
+            # TODO: 3d. If no match, add classifier label and no match result (0)
+            results_dic[key].extend([model_label, 0])  # Add classifier label and no match (0)
