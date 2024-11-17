@@ -32,14 +32,43 @@ def get_pet_labels(image_dir):
     Be sure to format the pet labels so that they are in all lower case letters
     and with leading and trailing whitespace characters stripped from them.
     (ex. filename = 'Boston_terrier_02259.jpg' Pet label = 'boston terrier')
+    
     Parameters:
      image_dir - The (full) path to the folder of images that are to be
                  classified by the classifier function (string)
+    
     Returns:
       results_dic - Dictionary with 'key' as image filename and 'value' as a 
-      List. The list contains for following item:
+      List. The list contains the following item:
          index 0 = pet image label (string)
     """
-    # Replace None with the results_dic dictionary that you created with this
-    # function
-    return None
+    # Creates list of files in directory
+    in_files = listdir(image_dir)
+    
+    # Creates empty dictionary for the results (pet labels, etc.)
+    results_dic = dict()
+   
+    # Processes through each file in the directory, extracting the pet image label
+    for idx in range(0, len(in_files), 1):
+       
+       # Skips file if starts with . (like .DS_Store of Mac OSX) because it 
+       # isn't a pet image file
+       if in_files[idx][0] != ".":
+           
+           # Creates temporary label variable to hold pet label name extracted 
+           pet_label = ""
+
+           # TODO 2a: Extract the pet label from the filename
+           # Split filename by underscore and take the first part as the label
+           pet_label_parts = in_files[idx].split('_')[:-1]  # Exclude file number part
+           pet_label = ' '.join(pet_label_parts).lower().strip()  # Join and format label
+
+           # If filename doesn't already exist in dictionary, add it and its pet label
+           if in_files[idx] not in results_dic:
+              results_dic[in_files[idx]] = [pet_label]
+           else:
+               print("** Warning: Duplicate files exist in directory:", 
+                     in_files[idx])
+ 
+    # TODO 2b: Return the dictionary with the pet labels
+    return results_dic
