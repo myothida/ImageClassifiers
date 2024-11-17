@@ -43,6 +43,7 @@ def adjust_results4_isadog(results_dic, dogfile):
     classified images 'as a dog' or 'not a dog' especially when not a match. 
     Demonstrates if model architecture correctly classifies dog images even if
     it gets dog breed wrong (not a match).
+    
     Parameters:
       results_dic - Dictionary with 'key' as image filename and 'value' as a 
                     List. Where the list will contain the following items: 
@@ -56,7 +57,7 @@ def adjust_results4_isadog(results_dic, dogfile):
                  NEW - index 4 = 1/0 (int)  where 1 = Classifier classifies image 
                             'as-a' dog and 0 = Classifier classifies image  
                             'as-NOT-a' dog.
-     dogfile - A text file that contains names of all dogs from the classifier
+      dogfile - A text file that contains names of all dogs from the classifier
                function and dog names from the pet image files. This file has 
                one dog name per line dog names are all in lowercase with 
                spaces separating the distinct words of the dog name. Dog names
@@ -64,7 +65,34 @@ def adjust_results4_isadog(results_dic, dogfile):
                by commas when a particular breed of dog has multiple dog names 
                associated with that breed (ex. maltese dog, maltese terrier, 
                maltese) (string - indicates text file's filename)
+    
     Returns:
            None - results_dic is mutable data type so no return needed.
-    """           
-    None
+    """
+
+    # Read the dog names from the dogfile into a set for quick lookup
+    with open(dogfile, 'r') as f:
+        dog_names = set(line.strip().lower() for line in f)
+
+    # Loop through the results dictionary
+    for key in results_dic:
+        pet_label = results_dic[key][0].lower()  # Pet image label (in lowercase)
+        classifier_label = results_dic[key][1].lower()  # Classifier label (in lowercase)
+
+        # Check if the pet label is a dog
+        if pet_label in dog_names:
+            results_dic[key].append(1)  # Add 1 if the pet image is a dog
+        else:
+            results_dic[key].append(0)  # Add 0 if the pet image is not a dog
+
+        # Check if the classifier label is a dog
+        classifier_labels = classifier_label.split(',')  # Split classifier label into multiple labels
+        classifier_is_dog = 0  # Assume classifier doesn't classify as a dog
+
+        for label in classifier_labels:
+            if label.strip() in dog_names:  # Check if any of the classifier labels match a dog name
+                classifier_is_dog = 1
+                break
+        
+        results_dic[key].append(classifier_is_dog)  # Add 1 if classifier label is a dog, otherwise 0
+
