@@ -96,14 +96,14 @@ def calculates_results_stats(results_dic):
             n_correct += 1
         
         # Count correct dog classifications
-        if pet_is_dog == 1 and classifier_is_dog == 1 and match == 1:
+        if pet_is_dog == 1 and classifier_is_dog == 1:
             n_correct_dogs += 1
         
         # Count correct non-dog classifications
-        if pet_is_dog == 0 and classifier_is_dog == 0 and match == 1:
+        if pet_is_dog == 0 and classifier_is_dog == 0:
             n_correct_notdogs += 1
 
-        if pet_is_dog ==1:
+        if pet_is_dog ==1 and match == 1:
             n_correct_breed +=1
 
     # Calculate the statistics
