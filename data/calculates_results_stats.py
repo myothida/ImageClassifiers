@@ -76,6 +76,8 @@ def calculates_results_stats(results_dic):
     n_correct = 0  # Number of correct classifications
     n_correct_dogs = 0  # Number of correct dog classifications
     n_correct_notdogs = 0  # Number of correct non-dog classifications
+    n_correct_breed = 0
+    
 
     # Loop through results_dic to accumulate the counts
     for key in results_dic:
@@ -101,20 +103,25 @@ def calculates_results_stats(results_dic):
         if pet_is_dog == 0 and classifier_is_dog == 0 and match == 1:
             n_correct_notdogs += 1
 
+        if pet_is_dog ==1:
+            n_correct_breed +=1
+
     # Calculate the statistics
     pct_correct = (n_correct / n_images) * 100 if n_images > 0 else 0
     pct_correct_dogs = (n_correct_dogs / n_dogs) * 100 if n_dogs > 0 else 0
+    pct_correct_breed = (n_correct_breed / n_dogs) * 100 if n_dogs > 0 else 0
     pct_correct_notdogs = (n_correct_notdogs / n_notdogs) * 100 if n_notdogs > 0 else 0
 
     # Create a dictionary for the results statistics
     results_stats_dic = {
         'n_images': n_images,
-        'n_dogs': n_dogs,
-        'n_notdogs': n_notdogs,
-        'n_correct': n_correct,
+        'n_dogs_img': n_dogs,
+        'n_notdogs_img': n_notdogs,
+        'n_match': n_correct,
         'n_correct_dogs': n_correct_dogs,
         'n_correct_notdogs': n_correct_notdogs,
-        'pct_correct': pct_correct,
+        'pct_match': pct_correct,
+        'pct_correct_breed': pct_correct_breed,
         'pct_correct_dogs': pct_correct_dogs,
         'pct_correct_notdogs': pct_correct_notdogs
     }

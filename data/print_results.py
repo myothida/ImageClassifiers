@@ -67,10 +67,10 @@ def print_results(results_dic, results_stats_dic, model,
     # Print the general statistics
     print(f"\nResults Summary for Model: {model}")
     print(f"Total Images: {results_stats_dic['n_images']}")
-    print(f"Total Dogs: {results_stats_dic['n_dogs']}")
-    print(f"Total Not Dogs: {results_stats_dic['n_notdogs']}")
-    print(f"Total Correct Classifications: {results_stats_dic['n_correct']}")
-    print(f"Percentage Correct Classifications: {results_stats_dic['pct_correct']:.2f}%")
+    print(f"Total Dogs: {results_stats_dic['n_dogs_img']}")
+    print(f"Total Not Dogs: {results_stats_dic['n_notdogs_img']}")
+    print(f"Total Correct Classifications: {results_stats_dic['n_correct_dogs']}")
+    print(f"Percentage Correct Classifications: {results_stats_dic['pct_match']:.2f}%")
     print(f"Percentage Correct Dogs: {results_stats_dic['pct_correct_dogs']:.2f}%")
     print(f"Percentage Correct Not Dogs: {results_stats_dic['pct_correct_notdogs']:.2f}%\n")
     

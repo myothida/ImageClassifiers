@@ -51,8 +51,7 @@ def get_pet_labels(image_dir):
     # Processes through each file in the directory, extracting the pet image label
     for idx in range(0, len(in_files), 1):
        
-       # Skips file if starts with . (like .DS_Store of Mac OSX) because it 
-       # isn't a pet image file
+      
        if in_files[idx][0] != ".":
            
            # Creates temporary label variable to hold pet label name extracted 
@@ -60,7 +59,7 @@ def get_pet_labels(image_dir):
 
            # TODO 2a: Extract the pet label from the filename
            # Split filename by underscore and take the first part as the label
-           pet_label_parts = in_files[idx].split('_')[:-1]  # Exclude file number part
+           pet_label_parts = in_files[idx].lower().split('_')[:-1]  # Exclude file number part
            pet_label = ' '.join(pet_label_parts).lower().strip()  # Join and format label
 
            # If filename doesn't already exist in dictionary, add it and its pet label
@@ -71,4 +70,5 @@ def get_pet_labels(image_dir):
                      in_files[idx])
  
     # TODO 2b: Return the dictionary with the pet labels
+
     return results_dic

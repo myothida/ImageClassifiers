@@ -3,9 +3,9 @@
 # */AIPND-revision/intropyproject-classify-pet-images/check_images.py
 #
 # TODO 0: Add your information below for Programmer & Date Created.                                                                             
-# PROGRAMMER: 
+# PROGRAMMER: Myo
 # DATE CREATED: 15/11/2024                              
-# REVISED DATE: 
+# REVISED DATE: 28/11/2024
 # PURPOSE: Classifies pet images using a pretrained CNN model, compares these
 #          classifications to the true identity of the pets in the images, and
 #          summarizes how well the CNN performed on the image classification task. 
@@ -42,28 +42,32 @@ def main():
     # TODO 0: Measures total program runtime by collecting start time
     start_time = time()
 
+    # TODO 1:
     in_arg = get_input_args()
     check_command_line_arguments(in_arg)
+    print(in_arg.dir)
 
-    results = get_pet_labels(None)
-
+    # TODO 2:
+    results = get_pet_labels(in_arg.dir)
     check_creating_pet_image_labels(results)
+
+    # TODO 3:
     classify_images(in_arg.dir, results, in_arg.arch)
-
-      
     check_classifying_images(results)    
+
+    # TODO 4:
     adjust_results4_isadog(results, in_arg.dogfile)
-
-    # Function that checks Results Dictionary for is-a-dog adjustment using results
     check_classifying_labels_as_dogs(results)
-    results_stats = calculates_results_stats(results)
 
+    # TODO 5:    
+    results_stats = calculates_results_stats(results)
     check_calculating_results(results, results_stats)
     print_results(results, results_stats, in_arg.arch, True, True)
     
-    end_time = time()
+   
     
     # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
+    end_time = time()
     tot_time = start_time - end_time
     print("\n** Total Elapsed Runtime:",
           str(int((tot_time/3600)))+":"+str(int((tot_time%3600)/60))+":"
