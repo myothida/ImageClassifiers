@@ -81,9 +81,8 @@ def print_results(results_dic, results_stats_dic, model,
             pet_is_dog = results_dic[key][3]
             classifier_is_dog = results_dic[key][4]
             match = results_dic[key][2]
-            
-            # Incorrectly classified dog (pet is a dog, but classifier says it's not)
-            if pet_is_dog == 1 and classifier_is_dog == 0:
+            # Incorrectly mis-classified
+            if pet_is_dog + classifier_is_dog ==1:
                 print(f"  {key} - Pet Label: {results_dic[key][0]}, Classifier Label: {results_dic[key][1]}")
 
     # Print incorrectly classified dog breeds if requested
