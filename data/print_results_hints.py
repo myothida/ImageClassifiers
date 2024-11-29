@@ -126,9 +126,7 @@ def print_results(results_dic, results_stats_dic, model,
 
     # IF print_incorrect_breed == True AND there were dogs whose breeds 
     # were incorrectly classified - print out these cases                    
-    if (print_incorrect_breed and 
-        (results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']) 
-       ):
+    if (print_incorrect_breed and (results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed'])):
         print("\nINCORRECT Dog Breed Assignment:")
 
         # process through results dict, printing incorrectly classified breeds

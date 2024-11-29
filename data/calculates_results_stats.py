@@ -120,6 +120,7 @@ def calculates_results_stats(results_dic):
         'n_match': n_correct,
         'n_correct_dogs': n_correct_dogs,
         'n_correct_notdogs': n_correct_notdogs,
+        'n_correct_breed': n_correct_breed,
         'pct_match': pct_correct,
         'pct_correct_breed': pct_correct_breed,
         'pct_correct_dogs': pct_correct_dogs,

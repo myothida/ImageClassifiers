@@ -75,7 +75,8 @@ def print_results(results_dic, results_stats_dic, model,
     print(f"Percentage Correct Breed: {results_stats_dic['pct_correct_breed']:.2f}%\n")
     
     # Print incorrectly classified dogs if requested
-    if print_incorrect_dogs:
+    if (print_incorrect_dogs and ( (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'])
+          != results_stats_dic['n_images'] ) ):
         print("\nIncorrectly Classified Dogs:")
         for key in results_dic:
             pet_is_dog = results_dic[key][3]
@@ -86,7 +87,7 @@ def print_results(results_dic, results_stats_dic, model,
                 print(f"  {key} - Pet Label: {results_dic[key][0]}, Classifier Label: {results_dic[key][1]}")
 
     # Print incorrectly classified dog breeds if requested
-    if print_incorrect_breed:
+    if (print_incorrect_breed and (results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed'])):
         print("\nIncorrectly Classified Dog Breeds:")
         for key in results_dic:
             pet_is_dog = results_dic[key][3]
